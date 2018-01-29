@@ -26,9 +26,10 @@ export default class App extends Component {
       markers: [],
       error: ''
     }
+
+    this.watchID = null;
   }
 
-  watchID: ?number = null
 
   renderMarkers() {
     return this.state.markers.map((marker, i) => {
@@ -50,7 +51,8 @@ export default class App extends Component {
       let markers = [];
       querySnapshot.forEach(marker => {
         markers.push(marker.data());
-      })
+      });
+
       this.setState({ markers });
     })
     .catch((error) => {
@@ -61,15 +63,24 @@ export default class App extends Component {
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
-      const initialRegion = JSON.stringify(position);
+      const initialRegion = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      };
 
       this.setState({initialPosition: initialRegion})
     }, (error) => alert(JSON.stringify(error)),
     {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000});
 
     this.watchID = navigator.geolocation.watchPosition((position) => {
-      const lastRegion = JSON.stringify(position);
+      const lastRegion = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      };
 
       this.setState({initialPosition: lastRegion})
     });
