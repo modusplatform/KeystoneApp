@@ -2,6 +2,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
+    "dev": "exp start",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll"
   },
   "jest": {
@@ -19,6 +20,7 @@
     "react-navigation": "^1.0.0-beta.27"
   },
   "devDependencies": {
+    "exp": "^49.0.3",
     "jest-expo": "^25.0.0"
   }
 }
