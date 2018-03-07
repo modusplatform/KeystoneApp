@@ -4,6 +4,10 @@ import MapView, { Marker } from 'react-native-maps';
 import firebase from 'firebase';
 import firestore from 'firebase/firestore';
 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getMarkers } from '../redux/markers/markers_actions';
+
 const { width, height } = Dimensions.get('window');
 
 const SCREEN_HEIGHT = height;
@@ -12,8 +16,8 @@ const ASPECT_RATIO = height/width;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-export default class App extends Component {
-  constructor(props) {
+class App extends Component {
+  constructor(props, { navigation }) {
     super(props)
 
     this.state = {
@@ -46,19 +50,7 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    firebase.firestore().collection('markers').get()
-    .then(querySnapshot => {
-      let markers = [];
-      querySnapshot.forEach(marker => {
-        markers.push(marker.data());
-      });
 
-      this.setState({ markers });
-    })
-    .catch((error) => {
-      console.log(error);
-      this.setState({error});
-    });
   }
 
   componentDidMount() {
@@ -103,6 +95,14 @@ export default class App extends Component {
     );
   }
 }
+
+mapStateToProps = ({ markers }) => { markers }
+
+mapDispatchToProps = (dispatch) => {
+  getMarkers: dispatch(getMarkers())
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 const styles = StyleSheet.create({
   container: {
