@@ -15,7 +15,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.modusapps.keystone"
+    },
+    "android": {
+      "package": "com.modusapps.keystone"
     }
   }
 }

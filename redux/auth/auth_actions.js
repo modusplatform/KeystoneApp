@@ -1,19 +1,9 @@
 import firebase from 'firebase';
 
-const AUTH_USER_GOOGLE = 'auth_user_google';
-const AUTH_USER_ANON = 'auth_user_anon';
+const AUTH_USER = 'auth_user_google';
 const AUTH_ERROR = 'auth_error';
 const UNAUTH_USER = 'unauth_user';
 
-export function signUpGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-
-
-}
-
-export function signInGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
-}
 
 export function signInAnon() {
   return function(dispatch) {
