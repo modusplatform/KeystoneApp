@@ -46,7 +46,13 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    firebase.firestore().collection('markers').get()
+    const firestore = firebase.firestore();
+    const settings = {
+      timestampsInSnapshots: true,
+    };
+    firestore.settings(settings);
+
+    firestore.collection('markers').get()
     .then(querySnapshot => {
       let markers = [];
       querySnapshot.forEach(marker => {

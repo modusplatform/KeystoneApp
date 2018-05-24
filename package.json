@@ -10,17 +10,17 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
-    "expo": "^25.0.0",
-    "firebase": "^4.9.0",
+    "expo": "^25.0.1",
+    "firebase": "^4.13.1",
     "geofire": "^4.1.2",
-    "prop-types": "^15.6.0",
+    "prop-types": "^15.6.1",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-native-maps": "^0.19.0",
-    "react-navigation": "^1.0.0-beta.27"
+    "react-navigation": "^1.5.12"
   },
   "devDependencies": {
     "exp": "^49.0.3",
-    "jest-expo": "^25.0.0"
+    "jest-expo": "^25.1.0"
   }
 }
