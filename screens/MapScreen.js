@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import { MapView } from 'expo';
+import { Icon } from 'react-native-elements';
+import Colors from '../constants/Colors';
 import firebase from 'firebase';
 import firestore from 'firebase/firestore';
 
@@ -11,15 +13,17 @@ const SCREEN_WIDTH = width;
 const ASPECT_RATIO = height/width;
 const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const PHILA_LAT = 39.952383;
+const PHILA_LONG = -75.1657883;
 
-export default class App extends Component {
+export default class MapScreen extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
       initialPosition: {
-        latitude: 39.952383,
-        longitude: -75.1657883,
+        latitude: PHILA_LAT,
+        longitude: PHILA_LONG,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },
@@ -34,7 +38,7 @@ export default class App extends Component {
   renderMarkers() {
     return this.state.markers.map((marker, i) => {
       if (marker.latitude && marker.longitude) {
-        return ( <Marker
+        return ( <MapView.Marker
           key={i}
           coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
           title={marker.name}
@@ -98,30 +102,28 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <MapView
-          style={styles.map}
-          region={this.state.initialPosition}
-        >
-          {this.renderMarkers()}
-        </MapView>
-      </View>
+      <MapView
+        style={styles.map}
+        region={this.state.initialPosition}
+      >
+        <Icon
+          reverse
+          name='camera'
+          style={styles.cameraIcon}
+          color={Colors.primaryBlue}
+          onPress={() => this.props.navigation.navigate('ARScreen')}
+        />
+        {this.renderMarkers()}
+      </MapView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
   map: {
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    position: 'absolute'
+    flex: 1
+  },
+  cameraIcon: {
+    top: 0
   }
 });

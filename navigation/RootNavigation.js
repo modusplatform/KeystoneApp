@@ -3,12 +3,16 @@ import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
+import ARScreen from '../screens/ARScreen';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
   {
     Main: {
       screen: MainTabNavigator,
+    },
+    ARScreen: {
+      screen: ARScreen,
     },
   },
   {
