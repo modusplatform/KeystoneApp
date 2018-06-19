@@ -60,7 +60,9 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [React Native](https://facebook.github.io/react-native/) - The web framework used
+* [React Native](https://facebook.github.io/react-native/)
+* [React Native Elements](https://github.com/react-native-training/react-native-elements)
+* [Firebase Auth & Firestore](https://firebase.google.com/products/)
 * [Expo](https://expo.io/tools) - Dependency Management
 
 ## Contributing
